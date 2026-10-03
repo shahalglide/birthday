@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Shahal's Birthday Portal | shahalglide.com</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,7 @@
 <style>
 :root {
   --bg-dark: #07090e;
-  --card-bg: rgba(18, 22, 34, 0.88);
+  --card-bg: rgba(18, 22, 34, 0.95);
   --border: rgba(255, 255, 255, 0.08);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
@@ -26,6 +26,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* Completely prevents right-side horizontal scrolling */
+}
+
 body {
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-dark);
@@ -33,11 +38,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; /* Prevent horizontal scrolling bug on mobile devices */
   position: relative;
 }
 
-/* Hardware-accelerated background ambient orbs */
+/* Hardware-accelerated background ambient orbs to prevent mobile lag */
 .bg-ambient {
   position: fixed;
   inset: 0;
@@ -48,17 +52,17 @@ body {
 
 .orb {
   position: absolute;
-  width: 380px;
-  height: 380px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.14;
+  filter: blur(60px);
+  opacity: 0.12;
   will-change: transform;
   transform: translate3d(0, 0, 0);
 }
 
-.orb-1 { background: var(--pink); top: -80px; left: -80px; }
-.orb-2 { background: var(--gold); bottom: -80px; right: -80px; }
+.orb-1 { background: var(--pink); top: -60px; left: -60px; }
+.orb-2 { background: var(--gold); bottom: -60px; right: -60px; }
 
 /* Subtle Matrix Grid */
 .grid-overlay {
@@ -76,7 +80,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
   width: 100%;
 }
 
@@ -85,13 +89,13 @@ main {
   width: 100%;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: clamp(24px, 5vw, 48px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 24px;
+  padding: clamp(20px, 4vw, 48px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 2;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* Header & Status */
@@ -105,13 +109,13 @@ main {
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  gap: 6px;
+  padding: 6px 12px;
   background: rgba(236, 72, 153, 0.1);
   border: 1px solid rgba(236, 72, 153, 0.2);
   border-radius: 50px;
   color: var(--pink);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -121,27 +125,26 @@ main {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
   color: var(--text-main);
-  padding: 8px 14px;
+  padding: 8px 12px;
   border-radius: 50px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-.sound-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
+.sound-toggle:active {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 h1 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -149,38 +152,37 @@ h1 {
 
 .subtitle {
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.6;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
-/* Countdown Grid */
 .countdown-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 10px;
+  margin-bottom: 28px;
 }
 
 .time-box {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px 8px;
+  border-radius: 14px;
+  padding: 14px 6px;
   text-align: center;
 }
 
 .time-value {
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
   font-weight: 700;
   color: var(--text-main);
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-variant-numeric: tabular-nums;
 }
 
 .time-label {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -189,7 +191,7 @@ h1 {
 
 .actions {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -197,31 +199,28 @@ h1 {
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 600;
-  padding: 14px 24px;
-  border-radius: 14px;
+  padding: 14px 20px;
+  border-radius: 12px;
   cursor: pointer;
   border: none;
-  transition: transform 0.1s ease, opacity 0.15s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   flex: 1;
-  min-width: 140px;
+  min-width: 130px;
+  /* Removed heavy transitions to eliminate mobile button lag */
 }
 
 .btn:active {
   transform: scale(0.96);
+  opacity: 0.85;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--pink), #db2777);
   color: #ffffff;
-  box-shadow: 0 4px 20px var(--accent-glow);
-}
-
-.btn-primary:hover {
-  opacity: 0.92;
+  box-shadow: 0 4px 15px var(--accent-glow);
 }
 
 .btn-secondary {
@@ -230,19 +229,14 @@ h1 {
   border: 1px solid var(--border);
 }
 
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.09);
-}
-
-/* Footer */
 .site-footer {
-  padding: 20px 24px;
+  padding: 18px 20px;
   border-top: 1px solid var(--border);
-  background: rgba(7, 9, 14, 0.9);
+  background: rgba(7, 9, 14, 0.95);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   z-index: 10;
 }
@@ -251,18 +245,23 @@ h1 {
   color: var(--text-main);
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s;
 }
 
-.footer-brand:hover {
+.footer-brand:hover, .footer-brand:active {
   color: var(--pink);
   text-decoration: underline;
 }
 
-@media(max-width: 580px) {
+/* Fix mobile performance lag by disabling heavy backdrop-filter on small screens */
+@media(max-width: 768px) {
+  .card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #101420; /* Solid high-performance background on mobile */
+  }
   .countdown-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
   .actions {
     flex-direction: column;
@@ -272,7 +271,7 @@ h1 {
   }
   .site-footer {
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     text-align: center;
   }
 }
@@ -329,8 +328,8 @@ h1 {
 </main>
 
 <footer class="site-footer">
-  <div>© 2026 <a href="https://shahalglide.com" class="footer-brand" target="_blank" rel="noopener">Shahal Glide</a></div>
-  <div style="color: var(--text-muted); font-size: 0.8rem;">All Rights Reserved</div>
+  <div>© 2026 <a href="https://shahalglide.com" class="footer-brand" target="_blank" rel="noopener">shahalglide.com</a></div>
+  <div style="color: var(--text-muted); font-size: 0.78rem;">All Rights Reserved</div>
 </footer>
 
 <script>
@@ -423,8 +422,19 @@ function sharePortal() {
       url: window.location.href
     }).catch(() => {});
   } else {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Birthday portal link copied to clipboard!");
+    const tempInput = document.createElement("input");
+    tempInput.value = window.location.href;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    
+    const subtitle = document.getElementById("subtitle-text");
+    const originalText = subtitle.textContent;
+    subtitle.textContent = "🔗 Portal link copied to clipboard!";
+    setTimeout(() => {
+      subtitle.textContent = originalText;
+    }, 2500);
   }
 }
 </script>
